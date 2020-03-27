@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 import { AlertController } from '@ionic/angular';
+import { Observable } from 'rxjs'
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -8,86 +9,134 @@ import { AlertController } from '@ionic/angular';
   templateUrl: 'tab1.page.html',
   styleUrls: ['tab1.page.scss']
 })
+
 export class Tab1Page {
+
+  btc: Observable<any>;
+  ltc: Observable<any>;
+  doge: Observable<any>;
+  xam: Observable<any>;
+  aqua: Observable<any>;
+  ath: Observable<any>;
+  cx: Observable<any>;
+  bitc: Observable<any>;
+  bitcl: Observable<any>;
+  mon2: Observable<any>;
+  mon: Observable<any>;
+  prkl: Observable<any>;
+  ubq: Observable<any>;
+  eoe: Observable<any>;
+  xero: Observable<any>;
+  doge2: Observable<any>;
+  etho: Observable<any>;
 
   constructor(private http: HttpClient) {
     setInterval(() => {
-      //Fetch Base Pair Volume
-      this.http.get('https://asymetrex.com/api').subscribe((response) => {
-        this.btc = response.btc_volume
-        this.ltc = response.ltc_volume
-        this.doge = response.doge_volume
-      });
+      //Fetch BTC Base Pair Volume
+      this.btc = this.http.get('https://asymetrex.com/api')
+      this.btc.subscribe(data => {
+        this.btc = data.btc_volume
+      })
+
+      //Fetch LTC Base Pair Volume
+      this.ltc = this.http.get('https://asymetrex.com/api')
+      this.ltc.subscribe(data => {
+        this.ltc = data.ltc_volume
+      })
+
+      //Fetch LTC Base Pair Volume
+      this.doge = this.http.get('https://asymetrex.com/api')
+      this.doge.subscribe(data => {
+        this.doge = data.doge_volume
+      })
 
       //Fetch XAM/BTC
-      this.http.get('https://asymetrex.com/api/tickers/xambtc').subscribe((response) => {
-        this.xam = response.ticker.volbtc
-      });
+      this.xam = this.http.get('https://asymetrex.com/api/tickers/xambtc')
+      this.xam.subscribe(data => {
+        this.xam = data.ticker.volbtc
+      })
 
       //Fetch AQUA/BTC
-      this.http.get('https://asymetrex.com/api/tickers/aquabtc').subscribe((response) => {
-        this.aqua = response.ticker.volbtc
-      });
+      this.aqua = this.http.get('https://asymetrex.com/api/tickers/aquabtc')
+      this.aqua.subscribe(data => {
+        this.aqua = data.ticker.volbtc
+      })
 
       //Fetch ATH/BTC
-      this.http.get('https://asymetrex.com/api/tickers/athbtc').subscribe((response) => {
-        this.ath = response.ticker.volbtc
-      });
+      this.ath = this.http.get('https://asymetrex.com/api/tickers/athbtc')
+      this.ath.subscribe(data => {
+        this.ath = data.ticker.volbtc
+      })
 
-      //Fetch BITC/LTC
-      this.http.get('https://asymetrex.com/api/tickers/bitcltc').subscribe((response) => {
-        this.bitc = response.ticker.volbtc
-      });
+      //Fetch BITC/LTC/BTC
+      this.bitc = this.http.get('https://asymetrex.com/api/tickers/bitcbtc')
+      this.bitcl = this.http.get('https://asymetrex.com/api/tickers/bitcltc')
+      this.bitc.subscribe(data => {
+        this.bitc = data.ticker.volbtc
+      })
+      this.bitcl.subscribe(data => {
+        this.bitcl = data.ticker.volbtc
+      })
 
       //Fetch CX/BTC
-      this.http.get('https://asymetrex.com/api/tickers/cxbtc').subscribe((response) => {
-        this.cx = response.ticker.volbtc
-      });
+      this.cx = this.http.get('https://asymetrex.com/api/tickers/cxbtc')
+      this.cx.subscribe(data => {
+        this.cx = data.ticker.volbtc
+      })
 
       //Fetch DOGE/BTC
-      this.http.get('https://asymetrex.com/api/tickers/dogebtc').subscribe((response) => {
-        this.doge = response.ticker.volbtc
-      });
+      this.doge = this.http.get('https://asymetrex.com/api/tickers/dogebtc')
+      this.doge.subscribe(data => {
+        this.doge = data.ticker.volbtc
+      })
 
       //Fetch DOGE/LTC
-      this.http.get('https://asymetrex.com/api/tickers/dogeltc').subscribe((response) => {
-        this.doge2 = response.ticker.volbtc
-      });
+      this.doge2 = this.http.get('https://asymetrex.com/api/tickers/dogeltc')
+      this.doge2.subscribe(data => {
+        this.doge2 = data.ticker.volbtc
+      })
 
       //Fetch ETHO/BTC
-      this.http.get('https://asymetrex.com/api/tickers/ethobtc').subscribe((response) => {
-        this.etho = response.ticker.volbtc
-      });
+      this.etho = this.http.get('https://asymetrex.com/api/tickers/ethobtc')
+      this.etho.subscribe(data => {
+        this.etho = data.ticker.volbtc
+      })
 
       //Fetch MON/BTC
-      this.http.get('https://asymetrex.com/api/tickers/monbtc').subscribe((response) => {
-        this.mon = response.ticker.volbtc
-      });
+      this.mon = this.http.get('https://asymetrex.com/api/tickers/monbtc')
+      this.mon.subscribe(data => {
+        this.mon = data.ticker.volbtc
+      })
 
       //Fetch MON/DOGE
-      this.http.get('https://asymetrex.com/api/tickers/mondoge').subscribe((response) => {
-        this.mon2 = response.ticker.volbtc
-      });
+      this.mon2 = this.http.get('https://asymetrex.com/api/tickers/mondoge')
+      this.mon2.subscribe(data => {
+        this.mon2 = data.ticker.volbtc
+      })
 
       //Fetch PRKL/BTC
-      this.http.get('https://asymetrex.com/api/tickers/prklbtc').subscribe((response) => {
-        this.prkl = response.ticker.volbtc
-      });
+      this.prkl = this.http.get('https://asymetrex.com/api/tickers/prklbtc')
+      this.prkl.subscribe(data => {
+        this.prkl = data.ticker.volbtc
+      })
 
       //Fetch UBQ/BTC
-      this.http.get('https://asymetrex.com/api/tickers/ubqbtc').subscribe((response) => {
-        this.ubq = response.ticker.volbtc
-      });
+      this.ubq = this.http.get('https://asymetrex.com/api/tickers/ubqbtc')
+      this.ubq.subscribe(data => {
+        this.ubq = data.ticker.volbtc
+      })
 
-      //Fetch XERO/BTC
-      this.http.get('https://asymetrex.com/api/tickers/xerobtc').subscribe((response) => {
-        this.xero = response.ticker.volbtc
-      });
+      //XERO/BTC
+      this.xero = this.http.get('https://asymetrex.com/api/tickers/xerobtc')
+      this.xero.subscribe(data => {
+        this.xero = data.ticker.volbtc
+      })
 
       //Fetch EOE/DOGE
-      this.http.get('https://asymetrex.com/api/tickers/eoedoge').subscribe((response) => {
-        this.eoe = response.ticker.volbtc
-      });
-    }, 6000);
+      this.eoe = this.http.get('https://asymetrex.com/api/tickers/eoedoge')
+      this.eoe.subscribe(data => {
+        this.eoe = data.ticker.volbtc
+      })
+    }, 10000);
   }
 }
